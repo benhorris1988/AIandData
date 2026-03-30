@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        :root {
+            --azure: #0078d4;
+            --memory: #ff00ad;
+            --ops: #27ae60;
+            --logic: #68217a;
+            --foundry: #1a1a1a;
+            --gold: #d4af37;
+            --bg: #f0f2f5;
+        }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); color: #323130; padding: 20px; line-height: 1.5; }
+        .container { max-width: 1450px; margin: 0 auto; }
+        
+        header { 
+            background: var(--foundry); color: white; padding: 30px; border-radius: 15px; 
+            text-align: center; border: 2px solid var(--gold); margin-bottom: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        header h1 { font-size: 28px; color: var(--gold); margin-bottom: 5px; }
+
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .col-label { text-align: center; font-weight: 800; font-size: 12px; text-transform: uppercase; color: #6e7781; margin-bottom: 15px; border-bottom: 2px solid #ddd; padding-bottom: 5px; }
+
+        .card { background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-top: 8px solid #ccc; margin-bottom: 25px; }
+        .card-header { padding: 15px 20px; font-weight: 700; border-bottom: 1px solid #eee; background: #fafafa; font-size: 15px; }
+        .card-body { padding: 20px; }
+
+        .mission-stmt { font-size: 12px; color: #555; font-style: italic; margin-bottom: 15px; padding: 10px; background: #f9f9f9; border-left: 3px solid var(--gold); }
+        
+        .role-entry { margin-bottom: 15px; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
+        .role-entry:last-child { border-bottom: none; }
+        .role-title { font-weight: 700; font-size: 13px; color: #111; display: block; }
+        .role-count { float: right; color: var(--azure); font-weight: 800; font-size: 11px; }
+        .role-detail { font-size: 12px; color: #444; margin-top: 4px; display: block; }
+
+        .tech-stack { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; }
+        .tag { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; background: #eee; border: 1px solid #ddd; color: #555; }
+
+        /* Hover-over Acronym Styling */
+        .tooltip { position: relative; cursor: help; }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 220px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 100;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -110px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 11px;
+            font-weight: 400;
+            line-height: 1.3;
+            pointer-events: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
+
+        .theme-foundation { border-top-color: var(--azure); }
+        .theme-memory { border-top-color: var(--memory); }
+        .theme-orchestration { border-top-color: var(--logic); }
+        .theme-ops { border-top-color: var(--ops); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>DATA & INTELLIGENCE ENGINE V6</h1>
+        <p>A Dedicated AI Ops Platform Model | <span id="totalFte">30</span> <span class="tooltip">FTE<span class="tooltiptext">Full-Time Equivalent: Represents the workload of one full-time employee.</span></span> Total</p>
+        <div class="slider-container" style="margin-top: 20px;">
+            <label for="yearSlider" style="font-weight: bold; color: var(--gold);">Progression Timeline: Year <span id="yearLabel">1</span></label><br>
+            <input type="range" id="yearSlider" min="1" max="3" value="1" style="width: 300px; margin-top: 10px; cursor: pointer;">
+            <div style="display: flex; justify-content: space-between; width: 300px; margin: 0 auto; font-size: 12px; color: #ccc; padding-top: 5px;">
+                <span>Year 1 (Data)</span>
+                <span>Year 2 (Transition)</span>
+                <span>Year 3 (AI)</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="grid">
+        <div class="column">
+            <div class="col-label">Level 1: Foundation & Semantic Bedrock</div>
+            <div class="card theme-foundation">
+                <div class="card-header"><span class="tooltip">Data Lakehouse<span class="tooltiptext">A modern storage architecture that combines the massive scale of a data lake with the querying power of a data warehouse.</span></span> & Knowledge Strategy</div>
+                <div class="card-body">
+                    <div class="mission-stmt">"Ensuring clean, organised facts are ready for <span class="tooltip">autonomous intelligence<span class="tooltiptext">AI systems capable of making decisions and executing tasks without constant human intervention.</span></span>."</div>
+                    
+                    <div class="role-entry">
+                        <span class="role-title">Core Data Engineers <span class="role-count"><span class="fte-val" data-y1="30" data-y2="25" data-y3="15">30</span> <span class="tooltip">FTE<span class="tooltiptext">Full-Time Equivalent.</span></span></span></span>
+                        <span class="role-detail">Migrating legacy <span class="tooltip">SQL<span class="tooltiptext">Structured Query Language: Language for database management.</span></span> to <span class="tooltip">Fabric OneLake<span class="tooltiptext">Microsoft's single logical data lake for the entire enterprise to avoid data silos.</span></span>. They manage the <span class="tooltip">Medallion architecture<span class="tooltiptext">A data design pattern describing data quality moving from Bronze (raw) to Silver (filtered) to Gold (business-level).</span></span> to provide <span class="tooltip">'Gold' data<span class="tooltiptext">Highly refined, validated data ready for immediate consumption by AI agents or BI reports.</span></span> for agents.</span>
+                        <div class="tech-stack">
+                            <span class="tag tooltip">Fabric<span class="tooltiptext">Microsoft's end-to-end data analytics platform.</span></span><span class="tag tooltip">OneLake<span class="tooltiptext">The single, logical data lake underlying Microsoft Fabric.</span></span><span class="tag"><span class="tooltip">ADF<span class="tooltiptext">Azure Data Factory: A cloud-based data integration service.</span></span></span><span class="tag tooltip">Databricks<span class="tooltiptext">A unified data analytics platform for massive scale data engineering and data science.</span></span><span class="tag tooltip">SQL Server<span class="tooltiptext">Microsoft's standard relational database management system.</span></span><span class="tag tooltip">SurrealDB<span class="tooltiptext">A multi-model database supporting SQL, NoSQL, and Graph queries.</span></span><span class="tag tooltip">Palantir Foundry<span class="tooltiptext">An enterprise operating system for data integration and analysis.</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card theme-ops">
+                <div class="card-header">AI FinOps</div>
+                <div class="card-body">
+                    <div class="mission-stmt">"Maintaining safety and predictability at the lowest possible cost."</div>
+                    <div class="role-entry">
+                        <span class="role-title">AI FinOps Engineers <span class="role-count"><span class="fte-val" data-y1="0" data-y2="1" data-y3="1">0</span> <span class="tooltip">FTE<span class="tooltiptext">Full-Time Equivalent.</span></span></span></span>
+                        <span class="role-detail">Managing <span class="tooltip">GPU<span class="tooltiptext">Graphics Processing Unit: Hardware specialised for AI computation.</span></span> quotas and <span class="tooltip">token circuit breakers<span class="tooltiptext">Automated limits that stop an AI if it starts generating too many costly words (tokens) unexpectedly.</span></span> to control enterprise spend.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="col-label">Level 2: The Cognitive Nervous System</div>
+            <div class="card theme-memory">
+                <div class="card-header">State & Global Memory Hub</div>
+                <div class="card-body">
+                    <div class="mission-stmt">"Managing <span class="tooltip">active session context<span class="tooltiptext">The short-term memory of an AI determining what it is currently focusing on or discussing right now.</span></span> and long-term historical memory."</div>
+                    
+                    <div class="role-entry">
+                        <span class="role-title">SurrealDB Storage & Memory Engineers <span class="role-count"><span class="fte-val" data-y1="0" data-y2="3" data-y3="5">0</span> <span class="tooltip">FTE<span class="tooltiptext">Full-Time Equivalent.</span></span></span></span>
+                        <span class="role-detail">Unified engineers managing <span class="tooltip">SurrealDB<span class="tooltiptext">A multi-model database built for real-time web apps and serverless environments.</span></span> as our primary <span class="tooltip">RDBMS<span class="tooltiptext">Relational Database Management System (e.g., storing rows and columns).</span></span>, <span class="tooltip">document<span class="tooltiptext">Databases storing data in JSON-like flexible documents.</span></span>, <span class="tooltip">vector<span class="tooltiptext">Databases indexing data arrays representing meaning, ideal for AI semantic searches.</span></span>, and <span class="tooltip">graph store<span class="tooltiptext">Databases tracking relationships between data points, like a social network map.</span></span>. They handle both short-term operational state (active agent sessions) and long-term <span class="tooltip">episodic memory<span class="tooltiptext">Records of past events or actions an AI has taken so it can learn from its history.</span></span> (<span class="tooltip">historical traces<span class="tooltiptext">Logs of previous conversational turns and logic steps.</span></span>) without unnecessary operational silos.</span>
+                        <div class="tech-stack"><span class="tag tooltip">SurrealDB<span class="tooltiptext">Multi-model RDBMS & Graph Store.</span></span><span class="tag tooltip">RDBMS & Docs<span class="tooltiptext">Relational and Document storage formats.</span></span><span class="tag tooltip">Graph & Vector Persistence<span class="tooltiptext">Storing relationship networks and mathematical meanings for AI.</span></span></div>
+                    </div>
+
+                    <div class="role-entry">
+                        <span class="role-title">Semantic Ontology Designers <span class="role-count"><span class="fte-val" data-y1="0" data-y2="1" data-y3="1">0</span> <span class="tooltip">FTE<span class="tooltiptext">Full-Time Equivalent.</span></span></span></span>
+                        <span class="role-detail">Mapping business logic to <span class="tooltip">Knowledge Graphs<span class="tooltiptext">Networks of real-world entities and the relationships between them, helping AI understand context.</span></span>. They prevent <span class="tooltip">fact-collisions<span class="tooltiptext">When two different systems or AI agents have conflicting definitions for the same business metric.</span></span> by ensuring all agents use identical data definitions.</span>
+                        <div class="tech-stack"><span class="tag tooltip">LeanIX<span class="tooltiptext">An Enterprise Architecture management tool used to map IT landscapes.</span></span><span class="tag tooltip">PoolParty<span class="tooltiptext">A semantic technology platform used for taxonomy management and knowledge graphs.</span></span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card theme-orchestration">
+                <div class="card-header"><span class="tooltip">Agentic Gateway<span class="tooltiptext">A central traffic cop that routes requests seamlessly to numerous individual AI agents.</span></span> & Coordination</div>
+                <div class="card-body">
+                    <div class="mission-stmt">"Managing <span class="tooltip">agent swarms<span class="tooltiptext">Groups of specialized AI tools working collaboratively to solve a larger, complex problem.</span></span> and universal plugs for company tools."</div>
+                    <div class="role-entry">
+                        <span class="role-title">Multi-Agent Coordinators <span class="role-count"><span class="fte-val" data-y1="0" data-y2="1" data-y3="1">0</span> <span class="tooltip">FTE<span class="tooltiptext">Full-Time Equivalent.</span></span></span></span>
+                        <span class="role-detail">Implementing <span class="tooltip">task negotiation protocols<span class="tooltiptext">Rules defining how different AI bots agree on who does what piece of a job.</span></span> like <span class="tooltip">CNP<span class="tooltiptext">Contract Net Protocol: A negotiation protocol for multi-agent systems where agents 'bid' to do a job.</span></span> for agent-to-agent task bidding.</span>
+                    </div>
+                    <div class="role-entry">
+                        <span class="role-title">Gateway Architects <span class="role-count"><span class="fte-val" data-y1="0" data-y2="1" data-y3="1">0</span> <span class="tooltip">FTE<span class="tooltiptext">Full-Time Equivalent.</span></span></span></span>
+                        <span class="role-detail">Designing tool access via <span class="tooltip">MCP<span class="tooltiptext">Model Context Protocol: Standard for securely connecting AI models to our private enterprise data and tools.</span></span> and routing <span class="tooltip">A2A<span class="tooltiptext">Agent-to-Agent: Direct communication between autonomous systems.</span></span> traffic through gateways like <span class="tooltip">Solo.io<span class="tooltiptext">An API gateway platform designed for modern cloud-native architectures.</span></span> and <span class="tooltip">Kong AI Gateway<span class="tooltiptext">An API gateway specifically optimized to manage, secure, and monitor AI traffic.</span></span>.</span>
+                        <div class="tech-stack"><span class="tag tooltip">Solo.io<span class="tooltiptext">Cloud-native API Gateway</span></span><span class="tag tooltip">Kong AI Gateway<span class="tooltiptext">Multi-LLM traffic management gateway</span></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="col-label">Level 3: Solutions Production</div>
+            <div class="card" style="border-top-color: #ff3621;">
+                <div class="card-header">AI Solutions & <span class="tooltip">Productionisation<span class="tooltiptext">The process of making software reliable, secure, and fast enough for real-world enterprise usage.</span></span></div>
+                <div class="card-body">
+                    <div class="mission-stmt">"Building reliable <span class="tooltip">AI assistants<span class="tooltiptext">Chatbots or automated tools that help users complete tasks.</span></span> that solve specific business problems."</div>
+                    <div class="role-entry">
+                        <span class="role-title">Senior AI System Engineers <span class="role-count"><span class="fte-val" data-y1="0" data-y2="2" data-y3="8">0</span> <span class="tooltip">FTE<span class="tooltiptext">Full-Time Equivalent.</span></span></span></span>
+                        <span class="role-detail">Turning experimental <span class="tooltip">POCs<span class="tooltiptext">Proof of Concept: Preliminary demonstration of an idea to show it works.</span></span> into <span class="tooltip">production-grade agents<span class="tooltiptext">AI systems that are secure, tested, and ready for end-user interaction.</span></span> compliant with <span class="tooltip">AOA<span class="tooltiptext">Agentic Oriented Architecture: Design pattern building systems entirely out of autonomous agents.</span></span> standards.</span>
+                        <div class="tech-stack">
+                            <span class="tag tooltip">AI Foundry<span class="tooltiptext">Azure AI Foundry: Microsoft's unified portal for building AI apps and co-pilots.</span></span><span class="tag"><span class="tooltip">Semantic Kernel<span class="tooltiptext">An open-source library from Microsoft that acts as the "glue", letting developers easily connect raw AI brains to existing business apps, APIs, and tools.</span></span></span>
+                        </div>
+                    </div>
+                    <div class="role-entry">
+                        <span class="role-title">Search & <span class="tooltip">RAG<span class="tooltiptext">Retrieval-Augmented Generation: Enhancing responses by pulling real company data into the AI's answer prompt.</span></span> Specialists <span class="role-count"><span class="fte-val" data-y1="0" data-y2="1" data-y3="2">0</span> <span class="tooltip">FTE<span class="tooltiptext">Full-Time Equivalent.</span></span></span></span>
+                        <span class="role-detail">Optimising <span class="tooltip">vector search<span class="tooltiptext">Searching documents based on their conceptual meaning rather than exact keyword matches.</span></span> so agents can retrieve exact data 'needles' from the Lakehouse 'haystack.'</span>
+                        <div class="tech-stack"><span class="tag tooltip">AI Search<span class="tooltiptext">Enterprise information retrieval platforms (e.g., Azure AI Search).</span></span><span class="tag tooltip">Vector DB<span class="tooltiptext">Databases purpose-built for AI meaning-searches.</span></span><span class="tag tooltip">SurrealDB<span class="tooltiptext">Used here specifically for its combined graph and vector search capabilities.</span></span></div>
+                    </div>
+                    <div class="role-entry">
+                        <span class="role-title"><span class="tooltip">LLMOps<span class="tooltiptext">Large Language Model Operations: The enterprise practices and tools required to securely run, monitor, and update AI models in the real world.</span></span> Platform Engineers <span class="role-count"><span class="fte-val" data-y1="0" data-y2="0" data-y3="1">0</span> <span class="tooltip">FTE<span class="tooltiptext">Full-Time Equivalent.</span></span></span></span>
+                        <span class="role-detail">Managing <span class="tooltip">model deployments<span class="tooltiptext">Taking an experimental AI model off a developer's laptop and making it securely available on enterprise servers for everyone to use.</span></span>, continuous <span class="tooltip">fine-tuning pipelines<span class="tooltiptext">Automated loops that feed our private company records into a generic AI so it learns our specific jargon and rules over time.</span></span>, and scalable <span class="tooltip">inference infrastructure<span class="tooltiptext">The heavy-duty servers, GPUs, and networking needed to actually generate an answer when a user talks to the AI.</span></span> to ensure high availability of AI endpoints.</span>
+                        <div class="tech-stack"><span class="tag"><span class="tooltip">Model Endpoints<span class="tooltiptext">The secure web addresses (URLs) that applications use to send questions to the AI.</span></span></span><span class="tag"><span class="tooltip">Fine-Tuning<span class="tooltiptext">The process of teaching a general AI model highly specialized company knowledge.</span></span></span><span class="tag"><span class="tooltip">Inference Routing<span class="tooltiptext">Directing user requests to the fastest, cheapest, or smartest AI model behind the scenes to save money and boost speed.</span></span></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const slider = document.getElementById('yearSlider');
+    const yearLabel = document.getElementById('yearLabel');
+    const totalFteLabel = document.getElementById('totalFte');
+    
+    function updateFTE() {
+        const year = slider.value;
+        yearLabel.textContent = year;
+        
+        const fteElements = document.querySelectorAll('.fte-val');
+        let total = 0;
+        
+        fteElements.forEach(el => {
+            const val = parseInt(el.getAttribute(`data-y${year}`));
+            el.textContent = val;
+            total += val;
+        });
+        
+        totalFteLabel.textContent = total;
+    }
+    
+    if (slider) {
+        slider.addEventListener('input', updateFTE);
+        updateFTE();
+    }
+</script>
+</body>
+</html>
