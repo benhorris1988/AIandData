@@ -16,11 +16,15 @@
         .container { max-width: 1450px; margin: 0 auto; }
         
         header { 
-            background: var(--foundry); color: white; padding: 30px; border-radius: 15px; 
-            text-align: center; border: 2px solid var(--gold); margin-bottom: 40px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            background: var(--foundry); color: white; padding: 20px 30px; border-radius: 10px; 
+            display: flex; justify-content: space-between; align-items: center;
+            border: 2px solid var(--gold); margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        header h1 { font-size: 28px; color: var(--gold); margin-bottom: 5px; }
+        .header-left { text-align: left; }
+        header h1 { font-size: 26px; color: var(--gold); margin: 0; line-height: 1.15; letter-spacing: 0.5px; }
+        header p { margin: 8px 0 0 0; font-size: 13px; color: #ddd; font-weight: 500; }
+
 
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
         .col-label { text-align: center; font-weight: 800; font-size: 12px; text-transform: uppercase; color: #6e7781; margin-bottom: 15px; border-bottom: 2px solid #ddd; padding-bottom: 5px; }
@@ -75,12 +79,15 @@
 
 <div class="container">
     <header>
-        <h1>DATA & INTELLIGENCE ENGINE V6</h1>
-        <p>A Dedicated AI Ops Platform Model | <span id="totalFte">30</span> <span class="tooltip">FTE<span class="tooltiptext">Full-Time Equivalent: Represents the workload of one full-time employee.</span></span> Total</p>
-        <div class="slider-container" style="margin-top: 20px;">
-            <label for="yearSlider" style="font-weight: bold; color: var(--gold);">Progression Timeline: Year <span id="yearLabel">1</span></label><br>
+        <div class="header-left">
+            <h1>DATA & INTELLIGENCE</h1>
+            <h1>ENGINE V6</h1>
+            <p>A Dedicated AI Ops Platform Model | <span id="totalFte">30</span> <span class="tooltip">FTE<span class="tooltiptext">Full-Time Equivalent: Represents the workload of one full-time employee.</span></span> Total</p>
+        </div>
+        <div class="slider-container" style="text-align: right;">
+            <label for="yearSlider" style="font-weight: bold; color: var(--gold); font-size: 14px;">Progression Timeline: Year <span id="yearLabel">1</span></label><br>
             <input type="range" id="yearSlider" min="1" max="3" value="1" style="width: 300px; margin-top: 10px; cursor: pointer;">
-            <div style="display: flex; justify-content: space-between; width: 300px; margin: 0 auto; font-size: 12px; color: #ccc; padding-top: 5px;">
+            <div style="display: flex; justify-content: space-between; width: 300px; margin: 0 0 0 auto; font-size: 12px; color: #ccc; padding-top: 5px;">
                 <span>Year 1 (Data)</span>
                 <span>Year 2 (Transition)</span>
                 <span>Year 3 (AI)</span>
@@ -90,18 +97,41 @@
 
     <div class="grid">
         <div class="column">
-            <div class="col-label">Level 1: Foundation & Semantic Bedrock</div>
+            <div class="col-label">Level 1: Data Foundation & Compute</div>
             <div class="card theme-foundation">
                 <div class="card-header"><span class="tooltip">Data Lakehouse<span class="tooltiptext">A modern storage architecture that combines the massive scale of a data lake with the querying power of a data warehouse.</span></span> & Knowledge Strategy</div>
                 <div class="card-body">
                     <div class="mission-stmt">"Ensuring clean, organised facts are ready for <span class="tooltip">autonomous intelligence<span class="tooltiptext">AI systems capable of making decisions and executing tasks without constant human intervention.</span></span>."</div>
                     
+                    <div class="tech-stack" style="margin-bottom: 20px;">
+                        <span class="tag tooltip">Palantir Foundry<span class="tooltiptext">Enterprise data ops.</span></span>
+                        <span class="tag tooltip">Fabric Architecture<span class="tooltiptext">Microsoft's end-to-end analytics capability.</span></span>
+                        <span class="tag tooltip">Databricks<span class="tooltiptext">Massive scale data engineering.</span></span>
+                        <span class="tag tooltip">OneLake<span class="tooltiptext">Logical data lake.</span></span>
+                        <span class="tag"><span class="tooltip">ADF<span class="tooltiptext">Azure Data Factory.</span></span></span>
+                        <span class="tag tooltip">SurrealDB<span class="tooltiptext">A multi-model database.</span></span>
+                        <span class="tag tooltip">SQL Server<span class="tooltiptext">Microsoft's standard relational database management system.</span></span>
+                    </div>
+
                     <div class="role-entry">
-                        <span class="role-title">Core Data Engineers <span class="role-count"><span class="fte-val" data-y1="30" data-y2="25" data-y3="15">30</span> <span class="tooltip">FTE<span class="tooltiptext">Full-Time Equivalent.</span></span></span></span>
-                        <span class="role-detail">Migrating legacy <span class="tooltip">SQL<span class="tooltiptext">Structured Query Language: Language for database management.</span></span> to <span class="tooltip">Fabric OneLake<span class="tooltiptext">Microsoft's single logical data lake for the entire enterprise to avoid data silos.</span></span>. They manage the <span class="tooltip">Medallion architecture<span class="tooltiptext">A data design pattern describing data quality moving from Bronze (raw) to Silver (filtered) to Gold (business-level).</span></span> to provide <span class="tooltip">'Gold' data<span class="tooltiptext">Highly refined, validated data ready for immediate consumption by AI agents or BI reports.</span></span> for agents.</span>
-                        <div class="tech-stack">
-                            <span class="tag tooltip">Fabric<span class="tooltiptext">Microsoft's end-to-end data analytics platform.</span></span><span class="tag tooltip">OneLake<span class="tooltiptext">The single, logical data lake underlying Microsoft Fabric.</span></span><span class="tag"><span class="tooltip">ADF<span class="tooltiptext">Azure Data Factory: A cloud-based data integration service.</span></span></span><span class="tag tooltip">Databricks<span class="tooltiptext">A unified data analytics platform for massive scale data engineering and data science.</span></span><span class="tag tooltip">SQL Server<span class="tooltiptext">Microsoft's standard relational database management system.</span></span><span class="tag tooltip">SurrealDB<span class="tooltiptext">A multi-model database supporting SQL, NoSQL, and Graph queries.</span></span><span class="tag tooltip">Palantir Foundry<span class="tooltiptext">An enterprise operating system for data integration and analysis.</span></span>
-                        </div>
+                        <span class="role-title">Data Provisioning Managers <span class="role-count"><span class="fte-val" data-y1="1" data-y2="1" data-y3="1">1</span> <span class="tooltip">FTE<span class="tooltiptext">Full-Time Equivalent.</span></span></span></span>
+                        <span class="role-detail">Handling data access requests, verifying IAO (Information Asset Owner) approvals, ensuring security requirements are met, and confirming explicit data ownership across the enterprise.</span>
+                    </div>
+
+                    <div class="role-entry">
+                        <span class="role-title">Principal Data Engineers <span class="role-count"><span class="fte-val" data-y1="2" data-y2="2" data-y3="2">2</span> <span class="tooltip">FTE<span class="tooltiptext">Full-Time Equivalent.</span></span></span></span>
+                    </div>
+
+                    <div class="role-entry">
+                        <span class="role-title">Senior Data Engineers <span class="role-count"><span class="fte-val" data-y1="20" data-y2="15" data-y3="8">20</span> <span class="tooltip">FTE<span class="tooltiptext">Full-Time Equivalent.</span></span></span></span>
+                    </div>
+
+                    <div class="role-entry">
+                        <span class="role-title">Intermediate Data Engineers <span class="role-count"><span class="fte-val" data-y1="4" data-y2="4" data-y3="3">4</span> <span class="tooltip">FTE<span class="tooltiptext">Full-Time Equivalent.</span></span></span></span>
+                    </div>
+
+                    <div class="role-entry">
+                        <span class="role-title">Junior Data Engineers <span class="role-count"><span class="fte-val" data-y1="4" data-y2="4" data-y3="2">4</span> <span class="tooltip">FTE<span class="tooltiptext">Full-Time Equivalent.</span></span></span></span>
                     </div>
                 </div>
             </div>
@@ -116,10 +146,23 @@
                     </div>
                 </div>
             </div>
+
+            <div class="card theme-foundation" style="border-top-color: #5d62b5;">
+                <div class="card-header">Platform & Infrastructure Compute</div>
+                <div class="card-body">
+                    <div class="mission-stmt">"Powering the bare-metal and cloud foundations the entire data engine runs on."</div>
+                    <div class="role-entry">
+                        <span class="role-title">Platform Infrastructure Engineers <span class="role-count"><span class="fte-val" data-y1="1" data-y2="2" data-y3="3">1</span> <span class="tooltip">FTE<span class="tooltiptext">Full-Time Equivalent.</span></span></span></span>
+                        <span class="role-detail">Owning the underlying hardware and cloud compute bridging. Transitioning legacy on-prem SQL servers to Azure scale-out clusters.</span>
+                        <div class="tech-stack"><span class="tag">SQL Server (On-Prem)</span><span class="tag">Azure Virtual Networks</span><span class="tag">Fabric Compute</span></div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div class="column">
-            <div class="col-label">Level 2: The Cognitive Nervous System</div>
+            <div class="col-label">Level 2: The Cognitive Nervous System & Semantic Bedrock</div>
             <div class="card theme-memory">
                 <div class="card-header">State & Global Memory Hub</div>
                 <div class="card-body">
@@ -178,6 +221,16 @@
                         <span class="role-title"><span class="tooltip">LLMOps<span class="tooltiptext">Large Language Model Operations: The enterprise practices and tools required to securely run, monitor, and update AI models in the real world.</span></span> Platform Engineers <span class="role-count"><span class="fte-val" data-y1="0" data-y2="0" data-y3="1">0</span> <span class="tooltip">FTE<span class="tooltiptext">Full-Time Equivalent.</span></span></span></span>
                         <span class="role-detail">Managing <span class="tooltip">model deployments<span class="tooltiptext">Taking an experimental AI model off a developer's laptop and making it securely available on enterprise servers for everyone to use.</span></span>, continuous <span class="tooltip">fine-tuning pipelines<span class="tooltiptext">Automated loops that feed our private company records into a generic AI so it learns our specific jargon and rules over time.</span></span>, and scalable <span class="tooltip">inference infrastructure<span class="tooltiptext">The heavy-duty servers, GPUs, and networking needed to actually generate an answer when a user talks to the AI.</span></span> to ensure high availability of AI endpoints.</span>
                         <div class="tech-stack"><span class="tag"><span class="tooltip">Model Endpoints<span class="tooltiptext">The secure web addresses (URLs) that applications use to send questions to the AI.</span></span></span><span class="tag"><span class="tooltip">Fine-Tuning<span class="tooltiptext">The process of teaching a general AI model highly specialized company knowledge.</span></span></span><span class="tag"><span class="tooltip">Inference Routing<span class="tooltiptext">Directing user requests to the fastest, cheapest, or smartest AI model behind the scenes to save money and boost speed.</span></span></span></div>
+                    </div>
+                    <div class="role-entry">
+                        <span class="role-title">ML Engineers <span class="role-count"><span class="fte-val" data-y1="0" data-y2="1" data-y3="3">0</span> <span class="tooltip">FTE<span class="tooltiptext">Full-Time Equivalent.</span></span></span></span>
+                        <span class="role-detail">Distinct from AI System Engineers, this specialized group focuses entirely on mathematically evaluating, training, and fine-tuning core foundation models rather than broad agent deployment.</span>
+                        <div class="tech-stack"><span class="tag">Model Training</span><span class="tag">Evaluation</span><span class="tag">RLHF</span></div>
+                    </div>
+                    <div class="role-entry">
+                        <span class="role-title">AI Product & Prompt Engineers <span class="role-count"><span class="fte-val" data-y1="0" data-y2="1" data-y3="2">0</span> <span class="tooltip">FTE<span class="tooltiptext">Full-Time Equivalent.</span></span></span></span>
+                        <span class="role-detail">Sitting between engineering and product. Designing complex system prompts, refining agent personas, writing workflow logic, and obsessing over the UX of exact language outputs.</span>
+                        <div class="tech-stack"><span class="tag">Prompt Engineering</span><span class="tag">Persona Design</span><span class="tag">Product Bridging</span></div>
                     </div>
                 </div>
             </div>
