@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 Enterprise Architecture: Lakehouse + SurrealDB Intelligence Layer</title>
+    <style>
+        :root {
+            --primary-bg: #1a1a1a;
+            --secondary-bg: #2d2d2d;
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --accent-surreal: #ff0055; /* SurrealDB Pink */
+            --accent-lakehouse: #0078d4; /* Azure Blue */
+            --accent-ai: #00e676; /* AI Green */
+            --border-color: #444;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid var(--accent-lakehouse);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Architectual Diagram Stylings */
+        .diagram-container {
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 40px;
+            overflow-x: auto; /* Handle overflow on small screens */
+        }
+
+        .diagram-title {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Flowchart CSS (Mermaid-like structure) */
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            min-width: 800px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            width: 100%;
+        }
+
+        .node {
+            background-color: #3d3d3d;
+            border: 2px solid #555;
+            border-radius: 6px;
+            padding: 15px;
+            text-align: center;
+            width: 180px;
+            min-height: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .node strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .node-tech {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Node Coloring */
+        .node-source { border-color: #888; }
+        .node-lakehouse { border-color: var(--accent-lakehouse); background-color: #1a3a5a; }
+        .node-surreal { border-color: var(--accent-surreal); background-color: #4a1a2a; }
+        .node-bi { border-color: #f2c811; background-color: #4a4a1a; color: #000; } /* PowerBI Yellow */
+        .node-bi strong { color: #000; }
+        .node-ai { border-color: var(--accent-ai); background-color: #1a4a2a; }
+
+        /* Connectors (Simplified CSS lines) */
+        .connector-v {
+            width: 2px;
+            height: 20px;
+            background-color: var(--border-color);
+        }
+
+        /* Explanation Sections */
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon-surreal { color: var(--accent-surreal); }
+        .icon-lakehouse { color: var(--accent-lakehouse); }
+        .icon-ai { color: var(--accent-ai); }
+
+        ul {
+            padding-left: 20px;
+            color: var(--text-muted);
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        code {
+            background-color: rgba(255,255,255,0.1);
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            color: #f8f8f2;
+        }
+        
+        .best-practice {
+            border-left: 4px solid var(--accent-ai);
+            background-color: rgba(0, 230, 118, 0.05);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .critical-warning {
+            border-left: 4px solid var(--accent-surreal);
+            background-color: rgba(255, 0, 85, 0.05);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>2026 Enterprise Architecture Decision Record</h1>
+
+    <div class="best-practice">
+        <strong>Executive Summary (Best Practice):</strong> Do not attempt a direct "Rip and Replace" of the SQL/Lakehouse stack with SurrealDB. Instead, deploy SurrealDB as a <strong>High-Performance Operational Intelligence Layer</strong> sitting <em>alongside</em> your persistent Lakehouse. This model provides the required scale for AI/Graph workloads while maintaining enterprise-grade governance and Power BI compatibility.
+    </div>
+
+    <div class="diagram-container">
+        <div class="diagram-title">Data & Intelligence Flow (2026)</div>
+        <div class="flowchart">
+            
+            <div class="row">
+                <div class="node node-source">
+                    <strong>Source Systems</strong>
+                    <span class="node-tech">ERP, CRM, Legacy SQL</span>
+                </div>
+            </div>
+
+            <div class="connector-v"></div>
+
+            <div class="row">
+                <div class="node">
+                    <strong>Ingest & ELT</strong>
+                    <span class="node-tech">ssis / ADF / dbt / Spark</span>
+                </div>
+            </div>
+
+            <div class="connector-v"></div>
+
+            <div class="row" style="gap: 100px;">
+                <div class="node node-lakehouse" style="width: 250px;">
+                    <strong>Enterprise Lakehouse</strong>
+                    <span class="node-tech">EDW/Fabric/Databricks/Azure)</span>
+                    <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); width: 100%;">
+                    <span class="node-tech">Role: Memory, Compliance, Star Schemas</span>
+                </div>
+                
+                <div style="display: flex; align-items: center; color: var(--text-muted);">
+                    &larr; CDC / Streaming Sync &rarr;
+                </div>
+
+                <div class="node node-surreal" style="width: 250px;">
+                    <strong>SurrealDB Cluster</strong>
+                    <span class="node-tech">Multi-Model (TiKV Backed)</span>
+                    <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); width: 100%;">
+                    <span class="node-tech">Role: Brain, Real-time Graph, Vectors</span>
+                </div>
+            </div>
+
+            <div class="row" style="gap: 100px; margin-top: -10px;">
+                 <div style="width: 250px; text-align: center;">
+                    <div class="connector-v" style="margin: 0 auto;"></div>
+                 </div>
+                 <div style="width: 250px; text-align: center;">
+                    <div class="connector-v" style="margin: 0 auto;"></div>
+                 </div>
+            </div>
+
+            <div class="row" style="gap: 50px;">
+                
+                <div class="node">
+                    <strong>Commvault</strong>
+                    <span class="node-tech">Immutable Object Storage Backup</span>
+                </div>
+
+                <div class="node node-bi">
+                    <strong>Power BI</strong>
+                    <span class="node-tech">Direct Lake / Import (Star Schema)</span>
+                </div>
+
+                <div class="node node-ai" style="width: 250px;">
+                    <strong>Agent Gateway</strong>
+                    <span class="node-tech">Managing agent swarms and universal plugs for company tools.</span>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: -10px;">
+                <div style="width: 100%; display: flex; justify-content: flex-end; padding-right: 110px;">
+                    <div class="connector-v"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div style="width: 100%; display: flex; justify-content: flex-end; gap: 30px;">
+                    <div class="node node-ai">
+                        <strong>LLMs & Chatbots</strong>
+                        <span class="node-tech">GPT, Claude (RAG via Surreal)</span>
+                    </div>
+                    <div class="node node-ai">
+                        <strong>MCP</strong>
+                        <span class="node-tech">Model Context Protocol</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="section-grid">
+
+        <div class="card">
+            <h3><span class="icon-lakehouse">&#128209;</span> 1. Source Systems & Lakehouse</h3>
+            <p>We assume SurrealDB *cannot* replace the regulatory and compliance scale of your persistent Lakehouse.</p>
+            <ul>
+                <li><strong>Best Practice:</strong> Legacy sources (ERP, CRM) must continue to hydrate the primary **Lakehouse Core** (using Delta Lake or Iceberg) for long-term retention.</li>
+                <li><strong>Ingest:</strong> Use Modern Data Stack tools (like dbt or Spark) for heavy-lift transformations (ELT) into standardized Star Schemas required for financial reporting.</li>
+                <li><strong>Backup:</strong> Commvault must protect this layer. Since it lacks a native SurrealDB agent, Commvault will back up the **Object Storage Snapshots** (S3/Azure Blob) of the Delta/Iceberg files, ensuring Point-in-Time Recovery (PITR).</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3><span class="icon-surreal">&#128170;</span> 2. SurrealDB: Operational Intelligence</h3>
+            <p>This is the "Brain" of the operation. It sits alongside the Lakehouse, holding a specialized, high-performance subset of operational data.</p>
+            <ul>
+                <li><strong>Placement:</strong> SurrealDB ingests critical, high-frequency operational data directly, or via CDC (Change Data Capture) streams from the Lakehouse Silver layer.</li>
+                <li><strong>Schema:</strong> Unlike the flat tables in the Lakehouse, SurrealDB models this data as a **Graph** (nodes and edges), representing real-time entity relationships.</li>
+                <li><strong>Role:</strong> While the Lakehouse handles "Compliance Memory" (YTD Sales), SurrealDB handles "Live Brain" (Which customers are currently browsing, and are they connected to known fraud graphs?).</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3><span class="icon-bi">&#128202;</span> 3. Power BI Interface</h3>
+            <div class="critical-warning">
+                <strong>Critical Limitation:</strong> Do not use Power BI to DirectQuery SurrealDB at Lakehouse scale. The generated SQL-to-SurrealQL translation layer is not mature, and graph models break the Star Schema optimization needed by DAX.
+            </div>
+            <ul>
+                <li><strong>Best Practice Connection:</strong> Power BI connects to the **Enterprise Lakehouse Core** using **Direct Lake** (Fabric) or DirectQuery over SQL views. This ensures sub-second responses on aggregate data (e.g., Financial Dashboards).</li>
+                <li><strong>The Surreal Link:</strong> If Power BI *must* see SurrealDB data, SurrealDB should "push" aggregated graph metrics *back* into flat tables within the Lakehouse (S3), which Power BI then ingests.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3><span class="icon-ai">&#129302;</span> 4. Vectors, Agents, & LLMs (The Winning Play)</h3>
+            <p>SurrealDB completely shines here, serving as the core of your RAG (Retrieval-Augmented Generation) strategy.</p>
+            <ul>
+                <li><strong>Vectors:</strong> Our text embeddings (from manuals, chat logs) are stored **Natively** within SurrealDB alongside the graph nodes they describe. (No specialized external Vector DB needed).</li>
+                <li><strong>Agent Gateway:</strong> Your AI Orchestration layer (e.g., LangChain, AutoGPT) connects to SurrealDB. When a chatbot needs context, the agent performs a **Hybrid Query** (Vector Similarity + Graph Traversal) in SurrealDB to get highly accurate context.</li>
+                <li><strong>LLMs & Chatbots:</strong> The Agent Gateway sends the curated context to the LLM (GPT-4, etc.) to generate the response.</li>
+                <li><strong>MCP (Model Context Protocol):</strong> The MCP acts as the standardized connection interface, allowing the LLM to uniformly discover and access the SurrealDB context without custom integration code for every bot.</li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
