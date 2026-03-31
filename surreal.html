@@ -184,10 +184,10 @@
 <body>
 
 <div class="container">
-    <h1>2026 Enterprise Architecture Decision Record</h1>
+    <h1>2026 Enterprise Architecture Proposal</h1>
 
     <div class="best-practice">
-        <strong>Executive Summary (Best Practice):</strong> Do not attempt a direct "Rip and Replace" of the SQL/Lakehouse stack with SurrealDB. Instead, deploy SurrealDB as a <strong>High-Performance Operational Intelligence Layer</strong> sitting <em>alongside</em> your persistent Lakehouse. This model provides the required scale for AI/Graph workloads while maintaining enterprise-grade governance and Power BI compatibility.
+        <strong>Architecture Proposal & Discussion:</strong> We propose deploying SurrealDB as our <strong>High-Performance Operational Intelligence Layer</strong>, sitting <em>alongside</em> our persistent Enterprise Lakehouse, rather than attempting a direct "Rip and Replace" of the existing SQL stack. This hybrid model strategically leverages SurrealDB's multi-model graph and native vector capabilities to power real-time AI Agent workloads via MCP, while retaining the Lakehouse for historical compliance and Power BI reporting. We are presenting this model to SurrealDB for feedback and architectural validation.
     </div>
 
     <div class="diagram-container">
@@ -215,7 +215,7 @@
             <div class="row" style="gap: 100px;">
                 <div class="node node-lakehouse" style="width: 250px;">
                     <strong>Enterprise Lakehouse</strong>
-                    <span class="node-tech">EDW/Fabric/Databricks/Azure)</span>
+                    <span class="node-tech">EDW/Fabric/Databricks/Azure</span>
                     <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); width: 100%;">
                     <span class="node-tech">Role: Memory, Compliance, Star Schemas</span>
                 </div>
@@ -233,48 +233,62 @@
             </div>
 
             <div class="row" style="gap: 100px; margin-top: -10px;">
-                 <div style="width: 250px; text-align: center;">
-                    <div class="connector-v" style="margin: 0 auto;"></div>
+                 <div style="width: 250px; display: flex; justify-content: space-around;">
+                    <div class="connector-v"></div>
+                    <div class="connector-v"></div>
                  </div>
                  <div style="width: 250px; text-align: center;">
                     <div class="connector-v" style="margin: 0 auto;"></div>
                  </div>
             </div>
 
-            <div class="row" style="gap: 50px;">
+            <div class="row" style="gap: 100px;">
                 
-                <div class="node">
-                    <strong>Commvault</strong>
-                    <span class="node-tech">Immutable Object Storage Backup</span>
-                </div>
+                <div style="width: 250px; display: flex; justify-content: space-between; gap: 10px;">
+                    <div class="node" style="width: 95px; padding: 10px; min-height: 50px;">
+                        <strong>Commvault</strong>
+                        <span class="node-tech">Backup</span>
+                    </div>
 
-                <div class="node node-bi">
-                    <strong>Power BI</strong>
-                    <span class="node-tech">Direct Lake / Import (Star Schema)</span>
+                    <div class="node node-bi" style="width: 95px; padding: 10px; min-height: 50px;">
+                        <strong>Power BI</strong>
+                        <span class="node-tech">Direct Lake</span>
+                    </div>
                 </div>
 
                 <div class="node node-ai" style="width: 250px;">
+                    <strong>MCP (Model Context Protocol)</strong>
+                    <span class="node-tech">Standardized semantic interface over SurrealDB and Lakehouse.</span>
+                </div>
+            </div>
+
+            <div class="row" style="gap: 100px; margin-top: -10px;">
+                 <div style="width: 250px;"></div>
+                 <div style="width: 250px; text-align: center;">
+                    <div class="connector-v" style="margin: 0 auto;"></div>
+                 </div>
+            </div>
+
+            <div class="row" style="gap: 100px;">
+                <div style="width: 250px;"></div>
+                <div class="node node-ai" style="width: 250px;">
                     <strong>Agent Gateway</strong>
-                    <span class="node-tech">Managing agent swarms and universal plugs for company tools.</span>
+                    <span class="node-tech">Managing agent swarms & query logic.</span>
                 </div>
             </div>
-
-            <div class="row" style="margin-top: -10px;">
-                <div style="width: 100%; display: flex; justify-content: flex-end; padding-right: 110px;">
-                    <div class="connector-v"></div>
-                </div>
+            
+            <div class="row" style="gap: 100px; margin-top: -10px;">
+                 <div style="width: 250px;"></div>
+                 <div style="width: 250px; text-align: center;">
+                    <div class="connector-v" style="margin: 0 auto;"></div>
+                 </div>
             </div>
 
-            <div class="row">
-                <div style="width: 100%; display: flex; justify-content: flex-end; gap: 30px;">
-                    <div class="node node-ai">
-                        <strong>LLMs & Chatbots</strong>
-                        <span class="node-tech">GPT, Claude (RAG via Surreal)</span>
-                    </div>
-                    <div class="node node-ai">
-                        <strong>MCP</strong>
-                        <span class="node-tech">Model Context Protocol</span>
-                    </div>
+            <div class="row" style="gap: 100px;">
+                <div style="width: 250px;"></div>
+                <div class="node node-ai" style="width: 250px;">
+                    <strong>LLMs & End User Chatbots</strong>
+                    <span class="node-tech">GPT, Claude (Context via Gateway)</span>
                 </div>
             </div>
 
@@ -319,9 +333,9 @@
             <p>SurrealDB completely shines here, serving as the core of your RAG (Retrieval-Augmented Generation) strategy.</p>
             <ul>
                 <li><strong>Vectors:</strong> Our text embeddings (from manuals, chat logs) are stored **Natively** within SurrealDB alongside the graph nodes they describe. (No specialized external Vector DB needed).</li>
-                <li><strong>Agent Gateway:</strong> Your AI Orchestration layer (e.g., LangChain, AutoGPT) connects to SurrealDB. When a chatbot needs context, the agent performs a **Hybrid Query** (Vector Similarity + Graph Traversal) in SurrealDB to get highly accurate context.</li>
-                <li><strong>LLMs & Chatbots:</strong> The Agent Gateway sends the curated context to the LLM (GPT-4, etc.) to generate the response.</li>
-                <li><strong>MCP (Model Context Protocol):</strong> The MCP acts as the standardized connection interface, allowing the LLM to uniformly discover and access the SurrealDB context without custom integration code for every bot.</li>
+                <li><strong>MCP (Model Context Protocol):</strong> Sits directly over the data layers (SurrealDB, Lakehouse) acting as the standardized connection interface. It allows the Agent Gateway to uniformly discover and access tables or graph context without writing custom integration code.</li>
+                <li><strong>Agent Gateway:</strong> Your AI Orchestration layer (e.g., LangChain, AutoGPT) connects to the MCP. When a chatbot needs context, the agent negotiates via MCP to perform a **Hybrid Query** (Vector Similarity + Graph Traversal) to fetch highly accurate context.</li>
+                <li><strong>LLMs & End Users:</strong> The user interacts via a chatbot UI. The Gateway routes instructions to the LLM (GPT-4, Claude) along with the rich contextual data retrieved via the MCP.</li>
             </ul>
         </div>
 
