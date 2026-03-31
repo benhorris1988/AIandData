@@ -6,14 +6,14 @@
     <title>2026 Enterprise Architecture: Lakehouse + SurrealDB Intelligence Layer</title>
     <style>
         :root {
-            --primary-bg: #1a1a1a;
-            --secondary-bg: #2d2d2d;
-            --text-main: #e0e0e0;
-            --text-muted: #a0a0a0;
-            --accent-surreal: #ff0055; /* SurrealDB Pink */
-            --accent-lakehouse: #0078d4; /* Azure Blue */
-            --accent-ai: #00e676; /* AI Green */
-            --border-color: #444;
+            --primary-bg: #f8fafc;
+            --secondary-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --accent-surreal: #e11d48; /* SurrealDB Pink */
+            --accent-lakehouse: #2563eb; /* Azure Blue */
+            --accent-ai: #059669; /* AI Green */
+            --border-color: #e2e8f0;
         }
 
         body {
@@ -26,7 +26,7 @@
         }
 
         h1, h2, h3 {
-            color: #fff;
+            color: var(--text-main);
             font-weight: 600;
         }
 
@@ -50,6 +50,7 @@
             padding: 20px;
             margin-bottom: 40px;
             overflow-x: auto; /* Handle overflow on small screens */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
 
         .diagram-title {
@@ -78,8 +79,8 @@
         }
 
         .node {
-            background-color: #3d3d3d;
-            border: 2px solid #555;
+            background-color: #ffffff;
+            border: 2px solid #cbd5e1;
             border-radius: 6px;
             padding: 15px;
             text-align: center;
@@ -90,12 +91,13 @@
             justify-content: center;
             font-size: 0.9rem;
             position: relative;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
 
         .node strong {
             display: block;
             margin-bottom: 5px;
-            color: #fff;
+            color: var(--text-main);
         }
 
         .node-tech {
@@ -105,12 +107,12 @@
         }
 
         /* Node Coloring */
-        .node-source { border-color: #888; }
-        .node-lakehouse { border-color: var(--accent-lakehouse); background-color: #1a3a5a; }
-        .node-surreal { border-color: var(--accent-surreal); background-color: #4a1a2a; }
-        .node-bi { border-color: #f2c811; background-color: #4a4a1a; color: #000; } /* PowerBI Yellow */
-        .node-bi strong { color: #000; }
-        .node-ai { border-color: var(--accent-ai); background-color: #1a4a2a; }
+        .node-source { border-color: #94a3b8; }
+        .node-lakehouse { border-color: var(--accent-lakehouse); background-color: #eff6ff; }
+        .node-surreal { border-color: var(--accent-surreal); background-color: #fff1f2; }
+        .node-bi { border-color: #eab308; background-color: #fefce8; }
+        .node-bi strong { color: var(--text-main); }
+        .node-ai { border-color: var(--accent-ai); background-color: #ecfdf5; }
 
         /* Connectors (Simplified CSS lines) */
         .connector-v {
@@ -156,11 +158,11 @@
         }
 
         code {
-            background-color: rgba(255,255,255,0.1);
+            background-color: rgba(0,0,0,0.05);
             padding: 2px 5px;
             border-radius: 4px;
             font-family: 'Courier New', Courier, monospace;
-            color: #f8f8f2;
+            color: #d926a9;
         }
         
         .best-practice {
@@ -216,7 +218,7 @@
                 <div class="node node-lakehouse" style="width: 250px;">
                     <strong>Enterprise Lakehouse</strong>
                     <span class="node-tech">EDW/Fabric/Databricks/Azure</span>
-                    <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); width: 100%;">
+                    <hr style="border:0; border-top:1px solid rgba(0,0,0,0.1); width: 100%;">
                     <span class="node-tech">Role: Memory, Compliance, Star Schemas</span>
                 </div>
                 
@@ -227,7 +229,7 @@
                 <div class="node node-surreal" style="width: 250px;">
                     <strong>SurrealDB Cluster</strong>
                     <span class="node-tech">Multi-Model (TiKV Backed)</span>
-                    <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); width: 100%;">
+                    <hr style="border:0; border-top:1px solid rgba(0,0,0,0.1); width: 100%;">
                     <span class="node-tech">Role: Brain, Real-time Graph, Vectors</span>
                 </div>
             </div>
