@@ -19,6 +19,7 @@
             --border: #e2e8f0;
             --azure: #2563eb;
             --success: #059669;
+            --step-bg: #f8fafc;
         }
 
         body {
@@ -41,7 +42,7 @@
 
         /* Sidebar Navigation */
         .sidebar {
-            width: 380px;
+            width: 400px;
             background-color: var(--bg-nav);
             border-right: 1px solid var(--border);
             display: flex;
@@ -128,6 +129,17 @@
             justify-content: center;
             font-size: 1.1rem;
             transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .nav-text {
+            flex: 1;
+        }
+        
+        .nav-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .nav-text h3 {
@@ -138,7 +150,7 @@
             transition: color 0.3s ease;
         }
 
-        .nav-text span {
+        .nav-text span.nav-subtitle {
             font-size: 0.75rem;
             color: var(--text-muted);
             text-transform: uppercase;
@@ -147,6 +159,17 @@
             display: block;
             margin-top: 4px;
         }
+
+        .nav-priority {
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+        .nav-priority.p-high { background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
+        .nav-priority.p-med { background: #fef3c7; color: #d97706; border: 1px solid #fde68a; }
+        .nav-priority.p-low { background: #f1f5f9; color: #64748b; border: 1px solid #cbd5e1; }
 
         /* Main Content Area */
         .content-area {
@@ -203,6 +226,7 @@
             align-items: center;
             justify-content: center;
             font-size: 1.8rem;
+            flex-shrink: 0;
             box-shadow: 0 8px 15px rgba(225, 29, 72, 0.2);
         }
 
@@ -213,61 +237,105 @@
             letter-spacing: -0.5px;
         }
 
-        .uc-title .badge {
-            display: inline-block;
+        .tag-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tag-group .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
             background-color: var(--bg-body);
             color: var(--text-muted);
             padding: 4px 10px;
             border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 600;
-            margin-top: 8px;
             border: 1px solid var(--border);
         }
 
-        .uc-body {
-            display: grid;
-            gap: 30px;
+        .badge.priority-high { background-color: #fef2f2; color: #dc2626; border-color: #fecaca; }
+        .badge.priority-med { background-color: #fffbeb; color: #d97706; border-color: #fde68a; }
+        .badge.priority-low { background-color: #f8fafc; color: #64748b; border-color: #cbd5e1; }
+
+        .badge.difficulty-high { background-color: #f5f3ff; color: #7c3aed; border-color: #ddd6fe; }
+        .badge.difficulty-med { background-color: #eff6ff; color: #2563eb; border-color: #bfdbfe; }
+        .badge.difficulty-low { background-color: #ecfeff; color: #0891b2; border-color: #a5f3fc; }
+
+        /* Step Sequence Design */
+        .step-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
-        .info-block {
-            background: #f8fafc;
-            border-left: 4px solid var(--accent);
-            padding: 25px;
-            border-radius: 0 12px 12px 0;
+        .step-item {
+            display: flex;
+            background: var(--step-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.2s ease;
         }
 
-        .info-block h4 {
-            margin: 0 0 10px 0;
-            color: var(--text-main);
-            font-size: 1.1rem;
+        .step-item:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            transform: scale(1.01);
+        }
+
+        .step-number {
+            background: #f1f5f9;
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            font-weight: 700;
+            min-width: 70px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            border-right: 1px solid var(--border);
+            font-family: monospace;
+        }
+        
+        .step-item.outcome .step-number {
+             background: var(--success);
+             color: white;
+             border-right: none;
         }
 
-        .info-block.testing { border-color: var(--azure); background: #eff6ff;}
-        .info-block.outcome { border-color: var(--success); background: #ecfdf5;}
+        .step-content {
+            padding: 20px 25px;
+            flex: 1;
+        }
 
-        .info-block p {
+        .step-content h4 {
+            margin: 0 0 8px 0;
+            color: var(--text-main);
+            font-size: 1.1rem;
+        }
+
+        .step-content p {
             margin: 0;
-            line-height: 1.7;
             color: #334155;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
         
         .code-snippet {
             background: #1e293b;
             color: #e2e8f0;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 15px;
+            border-radius: 8px;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             margin-top: 15px;
             line-height: 1.5;
         }
         .code-keyword { color: #f472b6; }
-        .code-string { color: #86efac; }
         .code-comment { color: #64748b; }
 
     </style>
@@ -280,55 +348,73 @@
     <nav class="sidebar">
         <div class="sidebar-header">
             <h1><i class="fa-solid fa-layer-group"></i> SurrealDB Sandbox</h1>
-            <p>Interactive evaluation framework for our Data Architecture modernization.</p>
+            <p>Interactive evaluation prioritization & framework for our Data Architecture modernization.</p>
         </div>
         <ul class="nav-list" id="nav-list">
             
-            <li class="nav-item active" data-target="uc-provisioning">
-                <div class="nav-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                <div class="nav-text">
-                    <h3>Data Provisioning & Auth</h3>
-                    <span>Graph Security</span>
-                </div>
-            </li>
-
-            <li class="nav-item" data-target="uc-transform">
+            <li class="nav-item active" data-target="uc-transform">
                 <div class="nav-icon"><i class="fa-solid fa-code-merge"></i></div>
                 <div class="nav-text">
-                    <h3>ELT & Transformation</h3>
-                    <span>SSIS Replacement</span>
+                    <div class="nav-title-row">
+                        <h3>ELT & Transformation</h3>
+                        <span class="nav-priority p-high">PRIORITY: 1</span>
+                    </div>
+                    <span class="nav-subtitle">Pipeline Modernization</span>
+                </div>
+            </li>
+            
+            <li class="nav-item" data-target="uc-provisioning">
+                <div class="nav-icon"><i class="fa-solid fa-shield-cat"></i></div>
+                <div class="nav-text">
+                    <div class="nav-title-row">
+                        <h3>Data Provisioning & Auth</h3>
+                        <span class="nav-priority p-high">PRIORITY: 1</span>
+                    </div>
+                    <span class="nav-subtitle">Graph Security</span>
                 </div>
             </li>
 
             <li class="nav-item" data-target="uc-intelligence">
                 <div class="nav-icon"><i class="fa-solid fa-brain"></i></div>
                 <div class="nav-text">
-                    <h3>The Intelligence Layer</h3>
-                    <span>Graph + Vectors</span>
+                    <div class="nav-title-row">
+                        <h3>The Intelligence Layer</h3>
+                        <span class="nav-priority p-high">PRIORITY: 1</span>
+                    </div>
+                    <span class="nav-subtitle">Graph + Vectors</span>
                 </div>
             </li>
 
             <li class="nav-item" data-target="uc-benchmark">
                 <div class="nav-icon"><i class="fa-solid fa-stopwatch"></i></div>
                 <div class="nav-text">
-                    <h3>Performance Benchmark</h3>
-                    <span>Vs Fabric Graph</span>
+                    <div class="nav-title-row">
+                        <h3>Performance Benchmark</h3>
+                        <span class="nav-priority p-med">PRIORITY: 2</span>
+                    </div>
+                    <span class="nav-subtitle">Vs Fabric Graph</span>
                 </div>
             </li>
 
             <li class="nav-item" data-target="uc-telemetry">
                 <div class="nav-icon"><i class="fa-solid fa-database"></i></div>
                 <div class="nav-text">
-                    <h3>Unstructured Telemetry</h3>
-                    <span>Document Store</span>
+                    <div class="nav-title-row">
+                        <h3>Unstructured Telemetry</h3>
+                        <span class="nav-priority p-low">PRIORITY: 3</span>
+                    </div>
+                    <span class="nav-subtitle">Document Store</span>
                 </div>
             </li>
 
             <li class="nav-item" data-target="uc-live">
                 <div class="nav-icon"><i class="fa-solid fa-bolt"></i></div>
                 <div class="nav-text">
-                    <h3>Event Streaming</h3>
-                    <span>Live Dashboards</span>
+                    <div class="nav-title-row">
+                        <h3>Event Streaming</h3>
+                        <span class="nav-priority p-low">PRIORITY: 3</span>
+                    </div>
+                    <span class="nav-subtitle">Live Dashboards</span>
                 </div>
             </li>
 
@@ -338,58 +424,98 @@
     <!-- Main Content Area -->
     <main class="content-area">
 
-        <!-- Use Case: Data Provisioning -->
-        <div id="uc-provisioning" class="use-case-content active">
-            <div class="uc-header">
-                <div class="uc-header-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                <div class="uc-title">
-                    <h2>Graph-Based Data Provisioning</h2>
-                    <div class="badge">Security & Access Control</div>
-                </div>
-            </div>
-            <div class="uc-body">
-                <div class="info-block">
-                    <h4><i class="fa-solid fa-crosshairs"></i> The Challenge in SQL</h4>
-                    <p>Row-level, column-level, table, and schema security is notoriously tricky to manage at scale in standard SQL Server. It often requires complex dynamic SQL, nested views, and triggers that degrade query performance and are hard to audit.</p>
-                </div>
-                <div class="info-block testing">
-                    <h4><i class="fa-solid fa-flask"></i> The SurrealDB Test</h4>
-                    <p>We will model our data provisioning natively as a <strong>Graph</strong>. Instead of static mapping tables, we'll create edge relationships representing 'access' directly linking <code>User/Group Node</code> -> <code>HAS_ACCESS_TO</code> -> <code>Dataset/Schema Node</code>. Furthermore, we will test SurrealDB's <code>DEFINE PERMISSIONS</code> functionality to enforce this graph logic at the database layer securely.</p>
-                    <div class="code-snippet">
-                        <span class="code-comment">-- Example of Graph-based Row Level Security in SurrealQL</span><br>
-                        <span class="code-keyword">DEFINE TABLE</span> patient_records <span class="code-keyword">SCHEMAFULL</span><br>
-                        &nbsp;&nbsp;<span class="code-keyword">PERMISSIONS</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">FOR</span> select, update <span class="code-keyword">WHERE</span> $auth.id <span class="code-keyword">-></span>manages<span class="code-keyword">-></span>id;
-                    </div>
-                </div>
-                <div class="info-block outcome">
-                    <h4><i class="fa-solid fa-bullseye"></i> Target Outcome</h4>
-                    <p>Prove that we can completely out-maneuver traditional relational data security by visualizing and enforcing access rights dynamically via Graph relationships. This would massively simplify our API and provisioning application architecture.</p>
-                </div>
-            </div>
-        </div>
-
         <!-- Use Case: ELT Transformation -->
-        <div id="uc-transform" class="use-case-content">
+        <div id="uc-transform" class="use-case-content active">
             <div class="uc-header">
                 <div class="uc-header-icon"><i class="fa-solid fa-code-merge"></i></div>
                 <div class="uc-title">
                     <h2>Staging & Transformation Workloads</h2>
-                    <div class="badge">Pipeline Modernization</div>
+                    <div class="tag-group">
+                        <div class="badge"><i class="fa-solid fa-tag"></i> Pipeline Modernization</div>
+                        <div class="badge priority-high"><i class="fa-solid fa-fire"></i> Priority: High</div>
+                        <div class="badge difficulty-med"><i class="fa-solid fa-layer-group"></i> Difficulty: Medium</div>
+                    </div>
                 </div>
             </div>
-            <div class="uc-body">
-                <div class="info-block">
-                    <h4><i class="fa-solid fa-crosshairs"></i> The Scenario</h4>
-                    <p>Moving heavily transformed staging data out of our existing SQL Server implementation and recreating those workflows natively.</p>
+            
+            <div class="step-list">
+                <div class="step-item">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h4>Move Staging & Apply Constraints</h4>
+                        <p>Move massive staging payloads into SurrealDB. Test its ability to seamlessly ingest and map a diverse range of existing database types and structures. Apply strict schema definitions, complex indexes, and heavy backend database constraints to validate structural integrity.</p>
+                    </div>
                 </div>
-                <div class="info-block testing">
-                    <h4><i class="fa-solid fa-flask"></i> The SurrealDB Test</h4>
-                    <p>Trial out the transformation workloads we currently orchestrate in SSIS and SQL Server Stored Procedures using SurrealQL's scripting and functional capabilities. We will construct event-driven pipelines utilizing SurrealDB events to reshape data upon insertion.</p>
+                
+                <div class="step-item">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h4>Heavy Transformation & Dimension Modeling</h4>
+                        <p>Select complex ETL jobs that currently take hours to process in SSIS/SQL. Rebuild them natively in SurrealDB to test execution performance. Critically, evaluate if SurrealQL can elegantly handle complex enterprise modeling paradigms like <strong>Temporal Tables</strong> and <strong>Slowly Changing Dimensions (SCDs)</strong>.</p>
+                    </div>
                 </div>
-                <div class="info-block outcome">
-                    <h4><i class="fa-solid fa-bullseye"></i> Target Outcome</h4>
-                    <p>Evaluate if the functional nature of SurrealQL provides a sufficient, cleaner alternative to T-SQL for ELT tasks, potentially allowing us to phase out legacy SSIS packages entirely for specific data domains.</p>
+
+                <div class="step-item outcome">
+                    <div class="step-number"><i class="fa-solid fa-check"></i></div>
+                    <div class="step-content">
+                        <h4>Target Architectural Outcome</h4>
+                        <p>Prove that SurrealDB can rapidly ingest and heavily transform vast datasets faster than our legacy pipelines, and mathematically validate if that resulting transformed data is highly performant to direct analytical queries.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Use Case: Data Provisioning -->
+        <div id="uc-provisioning" class="use-case-content">
+            <div class="uc-header">
+                <div class="uc-header-icon"><i class="fa-solid fa-shield-cat"></i></div>
+                <div class="uc-title">
+                    <h2>Graph-Based Data Provisioning</h2>
+                    <div class="tag-group">
+                        <div class="badge"><i class="fa-solid fa-tag"></i> Security & Access Control</div>
+                        <div class="badge priority-high"><i class="fa-solid fa-fire"></i> Priority: High</div>
+                        <div class="badge difficulty-high"><i class="fa-solid fa-dumbbell"></i> Difficulty: High</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step-list">
+                <div class="step-item">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h4>Acknowledge the SQL Constraint</h4>
+                        <p>Currently, implementing dynamic row, column, and schema security in SQL Server requires complex mapping tables, heavy triggers, and nested views that are difficult to audit and degrade performance at scale.</p>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h4>Model Security as a Graph</h4>
+                        <p>Instead of mapping tables, natively construct physical edge relationships connecting a `User` node to a `Dataset` node via a directed edge (e.g., `HAS_ACCESS_TO`).</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h4>Define Permissions</h4>
+                        <p>Utilize SurrealDB's native <code>DEFINE PERMISSIONS</code> functionality to execute this graph logic directly at the database layer securely.</p>
+                        <div class="code-snippet">
+                            <span class="code-comment">-- RLS enforced natively by Graph Edges in SurrealQL</span><br>
+                            <span class="code-keyword">DEFINE TABLE</span> dataset <span class="code-keyword">SCHEMAFULL</span><br>
+                            &nbsp;&nbsp;<span class="code-keyword">PERMISSIONS</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">FOR</span> select <span class="code-keyword">WHERE</span> $auth.id <span class="code-keyword">-></span>has_access_to<span class="code-keyword">-></span>id;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-item outcome">
+                    <div class="step-number"><i class="fa-solid fa-check"></i></div>
+                    <div class="step-content">
+                        <h4>Target Architectural Outcome</h4>
+                        <p>Decouple massive amounts of access control logic from the API and provisioning tiers by securely enforcing dynamic data-mesh security natively within the SurrealDB intelligence layer.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -400,21 +526,37 @@
                 <div class="uc-header-icon"><i class="fa-solid fa-brain"></i></div>
                 <div class="uc-title">
                     <h2>The GOLD Layer Evolution</h2>
-                    <div class="badge">AI & Semantic Search</div>
+                    <div class="tag-group">
+                        <div class="badge"><i class="fa-solid fa-tag"></i> AI & Semantic Search</div>
+                        <div class="badge priority-high"><i class="fa-solid fa-fire"></i> Priority: High</div>
+                        <div class="badge difficulty-high"><i class="fa-solid fa-dumbbell"></i> Difficulty: High</div>
+                    </div>
                 </div>
             </div>
-            <div class="uc-body">
-                <div class="info-block">
-                    <h4><i class="fa-solid fa-crosshairs"></i> The Scenario</h4>
-                    <p>Taking our curated, relational GOLD layer data and upgrading it to support next-generation Agentic AI and retrieval workloads.</p>
+            
+            <div class="step-list">
+                <div class="step-item">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h4>Baseline the Relational Data</h4>
+                        <p>Extract a frequently queried, highly-structured subset of historical data from our existing enterprise GOLD lakehouse layer.</p>
+                    </div>
                 </div>
-                <div class="info-block testing">
-                    <h4><i class="fa-solid fa-flask"></i> The SurrealDB Test</h4>
-                    <p>We will migrate a subset of the GOLD layer, physically structure it into a Graph, and generate semantic Vector Embeddings for unstructured text columns (like notes or histories), storing them natively in the same records.</p>
+                
+                <div class="step-item">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h4>Vectorization & Graph Linking</h4>
+                        <p>Convert the flat dimension tables into a unified Graph structure, and simultaneously generate numerical Vector embeddings for all unstructured free-text columns (like logs, histories, or notes).</p>
+                    </div>
                 </div>
-                <div class="info-block outcome">
-                    <h4><i class="fa-solid fa-bullseye"></i> Target Outcome</h4>
-                    <p>Demonstrate the power of a "Hybrid Search" query—finding records based on semantic vector similarity, and then immediately traversing its Graph connections, all within a single SurrealQL statement for our AI integrations.</p>
+
+                <div class="step-item outcome">
+                    <div class="step-number"><i class="fa-solid fa-check"></i></div>
+                    <div class="step-content">
+                        <h4>Target Architectural Outcome</h4>
+                        <p>Showcase a single elegant "Hybrid" query to our AI Agents—capable of locating contextually relevant records via Vector Semantic distance, and instantly executing multi-hop Graph traversals to uncover hidden relationships without heavy JOINs.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -425,21 +567,37 @@
                 <div class="uc-header-icon"><i class="fa-solid fa-stopwatch"></i></div>
                 <div class="uc-title">
                     <h2>Graph Performance Benchmarking</h2>
-                    <div class="badge">Scale & Viability</div>
+                    <div class="tag-group">
+                        <div class="badge"><i class="fa-solid fa-tag"></i> Scale & Viability</div>
+                        <div class="badge priority-med"><i class="fa-solid fa-circle-exclamation"></i> Priority: Medium</div>
+                        <div class="badge difficulty-med"><i class="fa-solid fa-layer-group"></i> Difficulty: Medium</div>
+                    </div>
                 </div>
             </div>
-            <div class="uc-body">
-                <div class="info-block">
-                    <h4><i class="fa-solid fa-crosshairs"></i> The Scenario</h4>
-                    <p>Stress-testing deep entity relationships (e.g., recursive hierarchal data, supply chain mapping, or identity tracking).</p>
+            
+            <div class="step-list">
+                <div class="step-item">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h4>Establish the Test Scenario</h4>
+                        <p>Construct a complex, deep recursive entity traversal pattern that pushes traditional SQL to its limit (e.g., massive supply chain traceability or fraud detection networks).</p>
+                    </div>
                 </div>
-                <div class="info-block testing">
-                    <h4><i class="fa-solid fa-flask"></i> The SurrealDB Test</h4>
-                    <p>Run a parallel ingestion and traversal test. We will build identical deep-link queries in SurrealQL, Microsoft Fabric Graph (using standard SQL graph extensions), and Kusto Query Language (KQL) to evaluate raw compute efficiency.</p>
+                
+                <div class="step-item">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h4>Parallel Execution Protocol</h4>
+                        <p>Build the exact identical test framework using native Microsoft Fabric Graph extensions, Kusto Query Language (KQL), and SurrealQL, ensuring parity in data volume.</p>
+                    </div>
                 </div>
-                <div class="info-block outcome">
-                    <h4><i class="fa-solid fa-bullseye"></i> Target Outcome</h4>
-                    <p>Establish hard baseline metrics for Query Latency, Ingestion Speed, and Developer Syntax Complexity, objectively validating if SurrealDB outperforms the Microsoft ecosystem in native graph operations.</p>
+
+                <div class="step-item outcome">
+                    <div class="step-number"><i class="fa-solid fa-check"></i></div>
+                    <div class="step-content">
+                        <h4>Target Architectural Outcome</h4>
+                        <p>Extract objective baseline metrics for maximum Ingestion Throughput, raw compute efficiency, developer syntax maintainability, and total multi-hop Query Latency at scale.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -450,21 +608,38 @@
                 <div class="uc-header-icon"><i class="fa-solid fa-database"></i></div>
                 <div class="uc-title">
                     <h2>Schema-less Telemetry Logging</h2>
-                    <div class="badge">Document Store Capabilities</div>
+                    <div class="tag-group">
+                        <div class="badge"><i class="fa-solid fa-tag"></i> Document Store Capabilities</div>
+                        <div class="badge" style="border-color: #8b5cf6; color: #8b5cf6; background: rgba(139, 92, 246, 0.05);">💡 Stu's Idea</div>
+                        <div class="badge priority-low"><i class="fa-solid fa-minus"></i> Priority: Low</div>
+                        <div class="badge difficulty-low"><i class="fa-solid fa-paper-plane"></i> Difficulty: Low</div>
+                    </div>
                 </div>
             </div>
-            <div class="uc-body">
-                <div class="info-block">
-                    <h4><i class="fa-solid fa-crosshairs"></i> The Scenario</h4>
-                    <p>Capturing un-schematized application logs, IoT streams, or volatile 3rd-party API responses.</p>
+            
+            <div class="step-list">
+                <div class="step-item">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h4>Target Volatile Ingestion Sources</h4>
+                        <p>Identify extremely rapid and unstructured data streams suffering from schema rot, such as IoT sensor telemetry, rapid application logs, or unpredictable 3rd-party JSON feeds.</p>
+                    </div>
                 </div>
-                <div class="info-block testing">
-                    <h4><i class="fa-solid fa-flask"></i> The SurrealDB Test</h4>
-                    <p>Bypass rigid SQL table definitions entirely. Ingest volatile JSON payloads directly into SurrealDB document tables and leverage dynamic indexing to query across unpredictable attributes.</p>
+                
+                <div class="step-item">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h4>Leverage the Document Engine</h4>
+                        <p>Directly funnel these JSON payloads into SurrealDB document-store tables explicitly without defining rigid structural schemas, forcing the database to dynamically adapt.</p>
+                    </div>
                 </div>
-                <div class="info-block outcome">
-                    <h4><i class="fa-solid fa-bullseye"></i> Target Outcome</h4>
-                    <p>Measure ingestion latency and query performance against SQL Server's <code>OPENJSON</code> functionally, determining if SurrealDB makes upstream data engineering pipelines more resilient to schema changes.</p>
+
+                <div class="step-item outcome">
+                    <div class="step-number"><i class="fa-solid fa-check"></i></div>
+                    <div class="step-content">
+                        <h4>Target Architectural Outcome</h4>
+                        <p>Benchmark SurrealDB's dynamic auto-indexing capabilities against SQL Server's rigid <code>OPENJSON</code> syntax when probing nested unstructured attributes, testing for upstream pipeline resilience.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -475,21 +650,37 @@
                 <div class="uc-header-icon"><i class="fa-solid fa-bolt"></i></div>
                 <div class="uc-title">
                     <h2>Real-time "Live" Dashboards</h2>
-                    <div class="badge">Event Streaming</div>
+                    <div class="tag-group">
+                        <div class="badge"><i class="fa-solid fa-tag"></i> Event Streaming</div>
+                        <div class="badge priority-low"><i class="fa-solid fa-minus"></i> Priority: Low</div>
+                        <div class="badge difficulty-med"><i class="fa-solid fa-layer-group"></i> Difficulty: Medium</div>
+                    </div>
                 </div>
             </div>
-            <div class="uc-body">
-                <div class="info-block">
-                    <h4><i class="fa-solid fa-crosshairs"></i> The Scenario</h4>
-                    <p>Powering "command center" style operational BI dashboards that require sub-second updates, traditionally requiring polling or SignalR overhead.</p>
+            
+            <div class="step-list">
+                <div class="step-item">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h4>Identify Transport Overhead</h4>
+                        <p>Isolate an operational 'Command Center' style dashboard currently relying heavily on taxing database polling routines or extensive SignalR/event-bus architectures for live refreshes.</p>
+                    </div>
                 </div>
-                <div class="info-block testing">
-                    <h4><i class="fa-solid fa-flask"></i> The SurrealDB Test</h4>
-                    <p>Deploy a frontend client utilizing a SurrealDB <code>LIVE SELECT</code> connection. As background systems ingest or alter records in the database, verifying the push notifications directly to the browser via WebSockets.</p>
+                
+                <div class="step-item">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h4>Establish Persistent WebSockets</h4>
+                        <p>Deploy a frontend client utilizing a SurrealDB <code>LIVE SELECT</code> connection. As background systems ingest/alter operational database records, verify immediate push notifications propagating to the frontend browser.</p>
+                    </div>
                 </div>
-                <div class="info-block outcome">
-                    <h4><i class="fa-solid fa-bullseye"></i> Target Outcome</h4>
-                    <p>Prove that we can eliminate our custom event-bus middle tier and rely entirely on the operational database to act as a resilient pub-sub message broker for UI updates.</p>
+
+                <div class="step-item outcome">
+                    <div class="step-number"><i class="fa-solid fa-check"></i></div>
+                    <div class="step-content">
+                        <h4>Target Architectural Outcome</h4>
+                        <p>Prove that we can substantially streamline infrastructure by allowing the operational database cluster itself to natively act as a resilient pub-sub message broker for UI components.</p>
+                    </div>
                 </div>
             </div>
         </div>
